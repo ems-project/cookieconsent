@@ -2,13 +2,13 @@ import Utilities from "./Utilities";
 import loMerge from 'lodash/merge';
 
 export default class Configuration {
-  
+
   constructor(configObject) {
 
     window.CookieConsent.buffer = {
       appendChild: [],
       insertBefore: []
-    }
+    };
 
     // Wrapper filter function
     window.CookieConsent.wrapper = function() {};
@@ -23,7 +23,7 @@ export default class Configuration {
       modalMainTextMoreLink: null,
       barTimeout: 1000,
       theme: {
-        barColor: '#2C7CBF',
+        barColor: 'rgba(0,0,0,0.9)',
         barTextColor: '#FFF',
         barMainButtonColor: '#FFF',
         barMainButtonTextColor: '#2C7CBF',
@@ -46,24 +46,37 @@ export default class Configuration {
             on: 'On',
             off: 'Off',
           },
-          hu: {
-            barMainText: 'Ez a weboldal Sütiket használ a jobb felhasználói élmény érdekében.',
-            barLinkSetting: 'Süti beállítások',
-            barBtnAcceptAll: 'Minden süti elfogadása',
-            modalMainTitle: 'Süti beállítások',
-            modalMainText: 'A HTTP-süti (általában egyszerűen süti, illetve angolul cookie) egy információcsomag, amelyet a szerver küld a webböngészőnek, majd a böngésző visszaküld a szervernek minden, a szerver felé irányított kérés alkalmával. Amikor egy weboldalt kérünk le a szervertől, akkor a böngésző elküldi a számára elérhető sütiket. A süti-ket úgy tervezték, hogy megbízható mechanizmust biztosítsanak a webhelyek számára az információk megőrzésére vagy a felhasználók böngészési tevékenységének rögzítésére.',
-            modalBtnSave: 'Beállítások mentése',
-            modalBtnAcceptAll: 'Minden Süti elfogadása',
-            modalAffectedSolutions: 'Mire lesz ez hatással:',
-            learnMore: 'Tudj meg többet',
-            on: 'Be',
-            off: 'Ki',
+          fr: {
+            barMainText: 'Ce site utilise des cookies pour vous offrir une expérience utilisateur de qualité.',
+            barLinkSetting: 'Paramétrez les cookies',
+            barBtnAcceptAll: 'Accepter tous les cookies',
+            modalMainTitle: 'Paramétrez les cookies',
+            modalMainText: 'Lorsque vous naviguez sur notre site, des cookies sont déposés sur votre navigateur. Pour certains d’entre eux, votre consentement peut être nécessaire. Cliquez sur chaque catégorie de cookies pour activer ou désactiver leur utilisation. Pour bénéficier de l’ensemble des fonctionnalités proposé par notre site, il est conseillé d\'accepter l\'ensemble des cookies.',
+            modalBtnSave: 'Sauvez les paramétres',
+            modalBtnAcceptAll: 'Accepter tous les cookies et fermer',
+            modalAffectedSolutions: 'Services concernés:',
+            learnMore: 'Plus d\'infos',
+            on: 'Activé',
+            off: 'Désactivé',
+          },
+          nl: {
+            barMainText: 'Deze site maakt gebruik van cookies om u een gebruikerservaring van hoge kwaliteit te bieden.',
+            barLinkSetting: 'Stel cookies in',
+            barBtnAcceptAll: 'Accepteer alle cookies',
+            modalMainTitle: 'Stel cookies in',
+            modalMainText: 'Onze websites maken gebruik van zogenaamde ‘cookies’. Cookies zijn kleine data- of tekstbestanden die op je computer of mobiel apparaat worden geïnstalleerd wanneer je een website bezoekt of een (mobiele) applicatie gebruikt. Cookiebestanden bevatten unieke codes die bijvoorbeeld toelaten dat je browser je herkent tijdens je bezoek aan een onlinedienst.',
+            modalBtnSave: 'Instellingen opslaan',
+            modalBtnAcceptAll: 'Accepteer alle cookies en sluit',
+            modalAffectedSolutions: 'Betrokken diensten:',
+            learnMore: 'Meer info',
+            on: 'Geactiveerd',
+            off: 'Invalide',
           }
         }
       },
       categories: {},
       services: {}
-    }
+    };
 
     this.setConfiguration(configObject);
 
@@ -91,7 +104,7 @@ export default class Configuration {
     document.cookie.split(';').filter((item) => {
 
       if (item.indexOf('cconsent')  >= 0) {
-        var cookieData = JSON.parse(item.split('=')[1]);
+        let cookieData = JSON.parse(item.split('=')[1]);
 
         // We check cookie version. If older we need to renew cookie.
         if (typeof cookieData.version === 'undefined') {
@@ -117,20 +130,20 @@ export default class Configuration {
           // The cookie contains service not present in user config so we invalidate cookie
           if(typeof window.CookieConsent.config.services[service] === 'undefined') {
             return removeReload();
-          } 
+          }
         });
 
         // We we integrate cookie data into the global config object
         for (let key in cookieData.categories) {
-          window.CookieConsent.config.categories[key].checked = window.CookieConsent.config.categories[key].wanted = (cookieData.categories[key].wanted === true) ? true : false;
+          window.CookieConsent.config.categories[key].checked = window.CookieConsent.config.categories[key].wanted = (cookieData.categories[key].wanted === true);
         }
 
         window.CookieConsent.config.cookieExists = true;
         return true;
       }
     });
-    
-    return false;
-  }
 
-}
+    return false;
+  };
+
+};
