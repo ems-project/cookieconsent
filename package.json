@@ -4,6 +4,7 @@
   "description": "Accept or refuse cookies consent script",
   "main": "dist/cookieconsent.min.js",
   "scripts": {
+    "test": "echo \"No test specified\"",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production"
   },
