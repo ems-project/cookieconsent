@@ -1,7 +1,7 @@
 import Filter from './Filter';
 
 export default class WrapperFilter extends Filter {
-  
+
   constructor() {
     super();
   }

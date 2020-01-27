@@ -5,10 +5,10 @@ export default class Language {
   }
   
   static getTranslation(object, locale, key) {
-    var currentLocale;
+    let currentLocale;
 
     if(!object.hasOwnProperty('language')) return '[Missing language object]';
-    if(!object.language.hasOwnProperty('locale')) return '[Missing locale object]'
+    if(!object.language.hasOwnProperty('locale')) return '[Missing locale object]';
     
     currentLocale = (object.language.locale.hasOwnProperty(locale)) ? locale : 'en';
 

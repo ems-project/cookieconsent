@@ -4,7 +4,7 @@ import loMerge from 'lodash/merge';
 export default class Configuration {
 
   constructor(configObject) {
-
+    let locale = document.getElementsByTagName('html')[0].hasAttribute('lang') ? document.getElementsByTagName('html')[0].getAttribute('lang') : 'en';
     window.CookieConsent.buffer = {
       appendChild: [],
       insertBefore: []
@@ -31,7 +31,7 @@ export default class Configuration {
         modalMainButtonTextColor: '#FFF',
       },
       language: {
-        current: 'en',
+        current: locale,
         locale: {
           en: {
             barMainText: 'This website uses cookies to ensure you get the best experience on our website.',

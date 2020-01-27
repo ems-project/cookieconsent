@@ -90,8 +90,8 @@ export default class Interface {
   buildModal() {
 
     // Cookie names list middleware
-    var listCookies = function(category) {
-      var list = [];
+    let listCookies = function(category) {
+      let list = [];
 
       for(let service in window.CookieConsent.config.services) {
         (window.CookieConsent.config.services[service].category === category) && list.push(window.CookieConsent.config.services[service]);
@@ -99,7 +99,7 @@ export default class Interface {
       
       if(list.length) {
         
-        var listItems = [];
+        let listItems = [];
         
         for(let item in list) {
           listItems.push(el('li', Language.getTranslation(list[item], window.CookieConsent.config.language.current, 'name')));
@@ -176,7 +176,7 @@ export default class Interface {
   }
 
   modalRedrawIcons() {
-    var tabGroups = this.elements['modal'].querySelectorAll('.ccm__tabgroup');
+    let tabGroups = this.elements['modal'].querySelectorAll('.ccm__tabgroup');
 
     for(let tabGroup of tabGroups) {
       if(window.CookieConsent.config.categories[tabGroup.dataset.category].checked) {
@@ -199,7 +199,7 @@ export default class Interface {
       callback(elem);
       return elem;
     } else {
-      var insertedElem = mount(document.body, elem);
+      let insertedElem = mount(document.body, elem);
       if (insertedElem) {
         this.elements[name] = insertedElem;
       }
@@ -211,7 +211,7 @@ export default class Interface {
   buildInterface(callback) {
 
     if (typeof callback === 'undefined') callback = function(){};
-    var that = this;
+    let that = this;
 
     Utilities.ready(function() {
 
@@ -235,8 +235,17 @@ export default class Interface {
 
   addEventListeners(elements) {
 
+    function getDlParent(eventTarget) {
+      let parent = eventTarget.parentNode;
+      if(parent.nodeName !== 'DL') {
+        return getDlParent(parent);
+      } else {
+        return parent;
+      }
+    }
+
     // If you click Accept all cookies
-    var buttonConsentGive = document.querySelectorAll('.consent-give');
+    let buttonConsentGive = document.querySelectorAll('.consent-give');
 
     for(let button of buttonConsentGive) {
       button.addEventListener('click', () => {
@@ -275,17 +284,8 @@ export default class Interface {
 
       // If you click trough the tabs on Cookie settings
       if (event.target.classList.contains('ccm__tab-head') || event.target.classList.contains('ccm__tab-head__icon-wedge')) {
-
-        function getDlParent(eventTarget) {
-          var parent = eventTarget.parentNode;
-          if(parent.nodeName !== 'DL') {
-            return getDlParent(parent);
-          } else {
-            return parent;
-          }
-        }
         
-        var parentDl = getDlParent(event.target);
+        let parentDl = getDlParent(event.target);
         
         if(parentDl.classList.contains('ccm__tabgroup--open')) {
           parentDl.classList.remove('ccm__tabgroup--open');
@@ -299,7 +299,7 @@ export default class Interface {
         window.CookieConsent.config.categories[event.target.dataset.category].wanted =
         window.CookieConsent.config.categories[event.target.dataset.category].checked = (event.target.checked === true) ? true : false;
 
-        var dt = document.querySelector('.ccm__tabgroup.' + event.target.dataset.category);
+        let dt = document.querySelector('.ccm__tabgroup.' + event.target.dataset.category);
         if(event.target.checked === false && dt.classList.contains('checked-5jhk')) {
           dt.classList.remove('checked-5jhk');
         } else {

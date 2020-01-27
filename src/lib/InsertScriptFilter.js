@@ -27,8 +27,8 @@ export default class InsertScriptFilter extends Filter {
             }
           }
         }
-      } 
-  
+      }
+
       return Node.prototype.appendChild.apply(this, arguments);
     }
 
@@ -37,7 +37,7 @@ export default class InsertScriptFilter extends Filter {
   overrideInsertBefore() {
 
     Element.prototype.insertBefore = function(elem) {
-    
+
       if(arguments[0].tagName === 'SCRIPT') {
         //console.log('Inserting:', arguments);
         for (let key in window.CookieConsent.config.services) {
@@ -52,7 +52,7 @@ export default class InsertScriptFilter extends Filter {
           }
         }
       }
-  
+
       return Node.prototype.insertBefore.apply(this, arguments);
     }
   }

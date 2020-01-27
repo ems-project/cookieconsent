@@ -14,16 +14,16 @@ export default class Utilities {
 
   static lightenDarkenColor(col, amt) {
 
-    var usePound = false;
+    let usePound = false;
   
     if (col[0] == "#") {
       col = col.slice(1);
       usePound = true;
     }
   
-    var num = parseInt(col, 16);
+    let num = parseInt(col, 16);
   
-    var r = (num >> 16) + amt;
+    let r = (num >> 16) + amt;
   
     if (r > 255) {
       r = 255;
@@ -31,7 +31,7 @@ export default class Utilities {
        r = 0;
     }
   
-    var b = ((num >> 8) & 0x00FF) + amt;
+    let b = ((num >> 8) & 0x00FF) + amt;
   
     if (b > 255) {
       b = 255;
@@ -39,7 +39,7 @@ export default class Utilities {
       b = 0;
     }
   
-    var g = (num & 0x0000FF) + amt;
+    let g = (num & 0x0000FF) + amt;
   
     if (g > 255) {
       g = 255;
