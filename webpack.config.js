@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/index.js',
     mode: 'development',
     output: {
-        filename: 'index.js',
+        filename: 'cookieconsent.min.js',
         path: path.resolve(__dirname, 'dist'),
         library: 'cookieConsent',
         libraryTarget: 'umd',

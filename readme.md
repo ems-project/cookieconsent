@@ -4,54 +4,21 @@ A script that displays a cookie consent message as required by EU regulation (GD
 
 See the demo: [Cookieconsent](https://brainsum.github.io/cookieconsent/)
 
-## Default look
-
-![Cookieconsent modal](https://raw.githubusercontent.com/brainsum/cookieconsent/master/cc_modal_75.png "Cookieconsent modal")
-
-## Features
-
-- IE11 compatible
-- Four different blocking methods
-- Multilingual
-- Mobile ready
-
-Currently it can block all the bad cookie monsters in 4 ways.
-
-### Dynamic script tags
-
-Some services insert dynamically created script tags to the HEAD at page load. These can be intercepted and blocked.
-
-### Script tag blocking
-
-Some third party services require you to insert a script tag into your HTML pages. These can be inactivated until the user allowes them.
-
-### Script wrapping
-
-Some services are not inserted in a SCRIPT tag and are obscured by layers of other code. Thats why this script creates a global wrapper function what you can use to wrap and blovk any JS code.
-
-### Local cookies
-
-Finally the local cookies set on your domain can be also filtered by overriding the bowsers COOKIE SET method.
-
 ## Usage
 
-1. Download the file cookieconsent.zip from the [latest release](https://github.com/brainsum/cookieconsent/releases/latest), and unpack its content.
+To be sure to catching all js files added dynamically by third parties, be careful that this javascript script is the first javascript file in the head tag of your page.. 
 
-2. Include the script file into your HTML page **before everything else.**
+### Usage with Webpack
 
-```
-<script src="cookieconsent.js"></script>
-```
+npm install --save-dev @elasticms/cookieconsent
 
-3. Call the init() function with the Configuration Object.
-
-See a working example in the docs folder.
-
-### Configuration object
-
-The script is being controlled mainly by a configuration object which is passed to the inital call. It acts as configuration and a global state object.
+in your entry js file :
 
 ```javascript
+import cookieConsent from '@elasticms/cookieconsent';
+
+cookieConsent();
+
 <script>
   window.CookieConsent.init({
     // More link URL on bar
@@ -85,7 +52,7 @@ The script is being controlled mainly by a configuration object which is passed 
           off: 'Off',
         }
       }
-    }
+    },
     // List all the categories you want to display
     categories: {
       // Unique name

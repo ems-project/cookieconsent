@@ -2,7 +2,7 @@
   "name": "@elasticms/cookieconsent",
   "version": "1.2.4",
   "description": "Accept or refuse cookies consent script",
-  "main": "dist/index.js",
+  "main": "dist/cookieconsent.min.js",
   "scripts": {
     "dev": "webpack --mode development",
     "prod": "webpack --mode production"
