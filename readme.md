@@ -19,7 +19,6 @@ import cookieConsent from '@elasticms/cookieconsent';
 
 cookieConsent();
 
-<script>
   window.CookieConsent.init({
     // More link URL on bar
     modalMainTextMoreLink: null,
@@ -109,5 +108,4 @@ cookieConsent();
       }
     }
   });
-  </script>
 ```
